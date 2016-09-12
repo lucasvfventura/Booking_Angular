@@ -8,6 +8,11 @@ namespace Booking.Models
 {
     public class User : IdentityUser, IEntity
     {
+        public User ()
+        {
+            Companies =  new List<UserCompany>();
+            UserType = UserType.Customer;
+        }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }

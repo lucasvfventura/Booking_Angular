@@ -6,6 +6,11 @@ namespace Booking.Models
 {
     public class Company : IEntity
     {
+        public Company ()
+        {
+            Phones = new List<Phone>();
+            Administrators = new List<UserCompany>();
+        }
         public string Id { get; set; }
         public string Name { get; set; }
         public string RegistrationNumber { get; set; }

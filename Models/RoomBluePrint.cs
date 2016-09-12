@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Booking.Models
 {
     public class RoomBluePrint : IEntity
@@ -7,10 +9,12 @@ namespace Booking.Models
         public string Description { get; set; }
         
         //TODO: add pictures
-        //TODO: add features
         
+        public List<RoomFeature> Features { get; set; }
         public string PropertyId { get; set; }
         public Property Property { get; set; }
+        public int AdultGuests { get; set; }
+        public int ChildGuests { get; set; }
     }
 
     public enum RoomType {Private, Shared, Suite}

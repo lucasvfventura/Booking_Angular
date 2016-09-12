@@ -12,6 +12,9 @@ using Microsoft.Extensions.Logging;
 using Booking.Data;
 using Booking.Models;
 using Booking.Services;
+using Booking.Data.Repositories;
+using Booking.Data.Repositories.Abstract;
+using Newtonsoft.Json.Serialization;
 
 namespace Booking
 {
@@ -47,7 +50,27 @@ namespace Booking
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddMvc();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserCompanyRepository, UserCompanyRepository>();
+            services.AddScoped<ICompanyRepository, CompanyRepository>();
+            services.AddScoped<IPropertyRepository, PropertyRepository>();
+            services.AddScoped<IRoomBluePrintRepository, RoomBluePrintRepository>();
+            services.AddScoped<IRoomFeatureRepository, RoomFeatureRepository>();
+            services.AddScoped<IRoomRepository, RoomRepository>();
+            services.AddScoped<IAvailabilityRepository, AvailabilityRepository>();
+            services.AddScoped<IReservationRepository, ReservationRepository>();
+            services.AddScoped<IReservationReviewRepository, ReservationReviewRepository>();
+
+            services.AddMvc()
+                .AddJsonOptions(opt =>
+                {
+                    var resolver = opt.SerializerSettings.ContractResolver;
+                    if (resolver != null)
+                    {
+                        var res = resolver as DefaultContractResolver;
+                        res.NamingStrategy = null;
+                    }
+                });
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();

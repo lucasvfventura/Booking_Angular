@@ -10,6 +10,8 @@ namespace Booking.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public ReservationStatus ReservationStatus { get; set; }
+
+        public ReservationReview Review { get; set; }
     }
 
     public enum ReservationStatus {WaitingPayment, Confirmed, InProgress, Cancelled, Finished}

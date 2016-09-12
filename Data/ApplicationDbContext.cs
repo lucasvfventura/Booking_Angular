@@ -23,9 +23,11 @@ namespace Booking.Data
         public Room Rooms { get; set; }
         public RoomBluePrint RoomBluePrints { get; set; }
         public RoomType RoomTypes { get; set; }
-
+        public RoomFeature RoomFeatures { get; set; }
         public Reservation Reservations { get; set; }
         public ReservationStatus ReservationStatus { get; set; }
+        public ReservationReview ReservationReviews { get; set; }
+        
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
