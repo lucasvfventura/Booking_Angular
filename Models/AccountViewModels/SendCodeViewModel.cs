@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace WebApplication.Models.AccountViewModels
+namespace Booking.Models.AccountViewModels
 {
     public class SendCodeViewModel
     {
