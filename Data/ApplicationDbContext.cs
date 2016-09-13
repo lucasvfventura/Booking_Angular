@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Booking.Models;
@@ -14,19 +10,14 @@ namespace Booking.Data
             : base(options)
         {
         }
-        public UserType UserTypes { get; set; }
-        public UserCompany UsersCompanies { get; set; }
-        public UserCompanyStatus UserCompanyStatus { get; set; }
-        public UserCompanyProfile UserCompanyProfiel { get; set; }
-        public Company Companies { get; set; }
-        public Property Properties { get; set; }
-        public Room Rooms { get; set; }
-        public RoomBluePrint RoomBluePrints { get; set; }
-        public RoomType RoomTypes { get; set; }
-        public RoomFeature RoomFeatures { get; set; }
-        public Reservation Reservations { get; set; }
-        public ReservationStatus ReservationStatus { get; set; }
-        public ReservationReview ReservationReviews { get; set; }
+        public DbSet<UserCompany> UsersCompanies { get; set; }
+        public DbSet<Company> Companies { get; set; }
+        public DbSet<Property> Properties { get; set; }
+        public DbSet<Room> Rooms { get; set; }
+        public DbSet<RoomBluePrint> RoomBluePrints { get; set; }
+        public DbSet<RoomFeature> RoomFeatures { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
+        public DbSet<ReservationReview> ReservationReviews { get; set; }
         
 
         protected override void OnModelCreating(ModelBuilder builder)

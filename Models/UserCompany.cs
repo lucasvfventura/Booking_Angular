@@ -1,5 +1,3 @@
-using System;
-
 namespace Booking.Models
 {
     public class UserCompany : IEntity
