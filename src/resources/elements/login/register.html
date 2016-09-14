@@ -1,0 +1,56 @@
+<template>
+    <div class="container">
+        <h4>Create a new account.</h4>
+        <hr />
+        <form submit.delegate="submit()">
+            <div class="form-inline">
+                <div class="form-group">
+                <label>
+                    First Name:
+                    <input type="text" class="form-control" value.bind="firstName" />
+                </label>
+                </div>
+                <div class="form-group">
+                    <label>
+                        Middle Name:
+                        <input type="text" class="form-control" value.bind="middleName" />
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>
+                        Last Name:
+                        <input type="text" class="form-control" value.bind="lastName" />
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>
+                    Birth date:
+                    <input id="birthdate" type="text" class="form-control" value.bind="birthDate" />
+                </label>
+            </div>
+            <div class="form-group">
+                <label>
+                    E-mail:
+                    <input type="email" class="form-control" value.bind="email" />
+                </label>
+            </div>
+            <div class="form-group">
+                <label>
+                    Password:
+                    <input type="password" class="form-control" value.bind="password"/>
+                </label>
+            </div>
+            <div class="form-group">
+                <label>
+                    Repeat Password:
+                    <input type="password" class="form-control" value.bind="repassword"/>
+                </label>
+            </div>
+            <div class="form-inline form-group">
+                <button class="btn btn-primary" type="submit">Register</button>
+                <button class="btn btn-default" type="button">Cancel</button>
+            </div>
+        </form>
+    </div>
+</template>

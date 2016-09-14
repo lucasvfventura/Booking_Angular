@@ -1,5 +1,8 @@
 <template>
   <require from="bootstrap/css/bootstrap.css"></require>
+  <require from="bootstrap-daterangepicker/daterangepicker.css"></require>
+  <require from="./resources/elements/login/login-menu"></require>
+  <require from="./resources/styles/main.css"></require>
 
    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
@@ -10,29 +13,28 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand">Booking</a>
+                <a route-href="route: search" class="navbar-brand">Booking</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a>Home</a></li>
-                    <li><a>About</a></li>
-                    <li><a>Contact</a></li>
+                    <li><a route-href="route: deals">Deals</a></li>
+                    <li><a route-href="route: business">For Business</a></li>
+                    <li><a route-href="route: aboutus">About Us</a></li>
                 </ul>
 
-                <!--// TODO: Add a separated element for login -->
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a>Register</a></li>
-                    <li><a>Log in</a></li>
-                </ul>
+                <login-menu class="login-menu" router.bind="router"></login-menu>
             </div>
         </div>
     </nav>
-    <div class="container body-content" style="padding-top: 40px">
-        <h1>${message}</h1>
+
+    <div class="container body-content" style="padding-top: 50px">
+        <router-view></router-view>
+    </div>
+    
+    <div class="container" >
         <hr />
         <footer>
             <p>&copy; 2016 - Booking</p>
         </footer>
     </div>
-  
 </template>
