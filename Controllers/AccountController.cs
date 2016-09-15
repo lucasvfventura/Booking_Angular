@@ -121,7 +121,7 @@ namespace Booking.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return BadRequest();
         }
 
         //
@@ -432,6 +432,14 @@ namespace Booking.Controllers
                 ModelState.AddModelError(string.Empty, "Invalid code.");
                 return View(model);
             }
+        }
+
+        [HttpDelete]
+        [AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(string moiddel)
+        {
+            return Ok();
         }
 
         #region Helpers

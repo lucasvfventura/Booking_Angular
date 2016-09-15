@@ -57,6 +57,61 @@ define('resources/index',["require", "exports"], function (require, exports) {
     exports.configure = configure;
 });
 
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+define('services/dataservices',["require", "exports", 'aurelia-fetch-client', 'aurelia-framework', 'whatwg-fetch'], function (require, exports, aurelia_fetch_client_1, aurelia_framework_1) {
+    "use strict";
+    var DataService = (function () {
+        function DataService(client) {
+            this.client = client;
+            this.client.configure(function (config) {
+                config
+                    .withDefaults({
+                    credentials: 'same-origin',
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'Fetch'
+                    }
+                });
+            });
+            this.baseUri = "";
+        }
+        DataService.prototype.setBaseUri = function (baseUri) {
+            this.baseUri = baseUri;
+        };
+        DataService.prototype.get = function () {
+            return this.client.fetch(this.baseUri);
+        };
+        DataService.prototype.getCustomResource = function (resource) {
+            return this.client.fetch(this.baseUri + resource);
+        };
+        DataService.prototype.post = function (resource) {
+            return this.client.fetch(this.baseUri, { method: "POST", body: aurelia_fetch_client_1.json(resource) });
+        };
+        DataService.prototype.postCustomResource = function (resourceUri, resource) {
+            return this.client.fetch(this.baseUri + resourceUri, { method: "POST", body: aurelia_fetch_client_1.json(resource) });
+        };
+        DataService.prototype.delete = function (id) {
+            return this.client.fetch(this.baseUri + ("/" + id), {
+                method: "DELETE"
+            });
+        };
+        DataService = __decorate([
+            aurelia_framework_1.autoinject(), 
+            __metadata('design:paramtypes', [aurelia_fetch_client_1.HttpClient])
+        ], DataService);
+        return DataService;
+    }());
+    exports.DataService = DataService;
+});
+
 define('resources/elements/aboutus',["require", "exports"], function (require, exports) {
     "use strict";
     var AboutUs = (function () {
@@ -124,10 +179,21 @@ define('resources/elements/login/login-menu',["require", "exports", 'aurelia-rou
     exports.LoginMenu = LoginMenu;
 });
 
-define('resources/elements/login/register',["require", "exports", "bootstrap-daterangepicker"], function (require, exports) {
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+define('resources/elements/login/register',["require", "exports", '../../../services/dataservices', 'aurelia-framework', "bootstrap-daterangepicker"], function (require, exports, dataservices_1, aurelia_framework_1) {
     "use strict";
     var Register = (function () {
-        function Register() {
+        function Register(dataService) {
+            this.dataService = dataService;
+            this.dataService.setBaseUri("account");
         }
         Register.prototype.attached = function () {
             jQuery("#birthdate").daterangepicker({
@@ -135,8 +201,12 @@ define('resources/elements/login/register',["require", "exports", "bootstrap-dat
             });
         };
         Register.prototype.submit = function () {
-            alert("Registration Complete");
+            this.dataService.delete("delete/1234");
         };
+        Register = __decorate([
+            aurelia_framework_1.autoinject, 
+            __metadata('design:paramtypes', [dataservices_1.DataService])
+        ], Register);
         return Register;
     }());
     exports.Register = Register;
@@ -159,6 +229,6 @@ define('text!resources/elements/business.html', ['module'], function(module) { m
 define('text!resources/elements/deals.html', ['module'], function(module) { module.exports = "<template>\r\n    <div>\r\n        Deals\r\n    </div>\r\n</template>"; });
 define('text!resources/elements/error.html', ['module'], function(module) { module.exports = "<template>\r\n    <div>\r\n        Page not found 404\r\n    </div>\r\n</template>"; });
 define('text!resources/elements/login/login-menu.html', ['module'], function(module) { module.exports = "<template>\r\n    <ul class=\"nav navbar-nav navbar-right\">\r\n        <li><a route-href=\"route: register\">Register</a></li>\r\n        <li><a>Log in</a></li>\r\n    </ul>\r\n</template>"; });
-define('text!resources/elements/login/register.html', ['module'], function(module) { module.exports = "<template>\r\n    <div class=\"container\">\r\n        <h4>Create a new account.</h4>\r\n        <hr />\r\n        <form submit.delegate=\"submit()\">\r\n            <div class=\"form-inline\">\r\n                <div class=\"form-group\">\r\n                <label>\r\n                    First Name:\r\n                    <input type=\"text\" class=\"form-control\" value.bind=\"firstName\" />\r\n                </label>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label>\r\n                        Middle Name:\r\n                        <input type=\"text\" class=\"form-control\" value.bind=\"middleName\" />\r\n                    </label>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label>\r\n                        Last Name:\r\n                        <input type=\"text\" class=\"form-control\" value.bind=\"lastName\" />\r\n                    </label>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label>\r\n                    Birth date:\r\n                    <input id=\"birthdate\" type=\"text\" class=\"form-control\" value.bind=\"birthDate\" />\r\n                </label>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label>\r\n                    E-mail:\r\n                    <input type=\"email\" class=\"form-control\" value.bind=\"email\" />\r\n                </label>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label>\r\n                    Password:\r\n                    <input type=\"password\" class=\"form-control\" value.bind=\"password\"/>\r\n                </label>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label>\r\n                    Repeat Password:\r\n                    <input type=\"password\" class=\"form-control\" value.bind=\"repassword\"/>\r\n                </label>\r\n            </div>\r\n            <div class=\"form-inline form-group\">\r\n                <button class=\"btn btn-primary\" type=\"submit\">Register</button>\r\n                <button class=\"btn btn-default\" type=\"button\">Cancel</button>\r\n            </div>\r\n        </form>\r\n    </div>\r\n</template>"; });
+define('text!resources/elements/login/register.html', ['module'], function(module) { module.exports = "<template>\r\n    <div class=\"container\">\r\n        <h4>Create a new account.</h4>\r\n        <hr />\r\n        <form submit.delegate=\"submit()\">\r\n            <div class=\"form-inline\">\r\n                <div class=\"form-group\">\r\n                <label>\r\n                    First Name:\r\n                    <input type=\"text\" class=\"form-control\" value.bind=\"firstName\" />\r\n                </label>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label>\r\n                        Middle Name:\r\n                        <input type=\"text\" class=\"form-control\" value.bind=\"middleName\" />\r\n                    </label>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label>\r\n                        Last Name:\r\n                        <input type=\"text\" class=\"form-control\" value.bind=\"lastName\" />\r\n                    </label>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label>\r\n                    Birth date:\r\n                    <input id=\"birthdate\" type=\"text\" class=\"form-control\" value.bind=\"birthDate\" />\r\n                </label>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label>\r\n                    E-mail:\r\n                    <input type=\"email\" class=\"form-control\" value.bind=\"email\" />\r\n                </label>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label>\r\n                    Password:\r\n                    <input type=\"password\" class=\"form-control\" value.bind=\"password\"/>\r\n                </label>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label>\r\n                    Repeat Password:\r\n                    <input type=\"password\" class=\"form-control\" value.bind=\"confirmPassword\"/>\r\n                </label>\r\n            </div>\r\n            <div class=\"form-inline form-group\">\r\n                <button class=\"btn btn-primary\" type=\"submit\">Register</button>\r\n                <button class=\"btn btn-default\" type=\"button\">Cancel</button>\r\n            </div>\r\n        </form>\r\n    </div>\r\n</template>"; });
 define('text!resources/elements/reservation/search.html', ['module'], function(module) { module.exports = "<template>\r\n    Search\r\n</template>"; });
 //# sourceMappingURL=app-bundle.js.map
