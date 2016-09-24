@@ -109,6 +109,7 @@
           "aurelia-task-queue",
           "aurelia-templating",
           "aurelia-templating-binding",
+          "aurelia-fetch-client",
           {
             "name": "text",
             "path": "../wwwroot\\scripts/text"
@@ -129,7 +130,9 @@
             "main": "aurelia-testing",
             "env": "dev"
           },
+          "whatwg-fetch",
           "jquery",
+          "moment",
           {
             "name": "bootstrap",
             "path": "../node_modules/bootstrap/dist",
@@ -137,6 +140,14 @@
             "deps": ["jquery"],
             "exports": "$",
             "resources": ["css/bootstrap.css"]
+          },
+          {
+            "name": "bootstrap-daterangepicker",
+            "path": "../node_modules/bootstrap-daterangepicker",
+            "main": "daterangepicker",
+            "deps": ["jquery", "moment"],
+            "exports": "daterangepicker",
+            "resources": ["daterangepicker.css"]
           }
         ]
       }

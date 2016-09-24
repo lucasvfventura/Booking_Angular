@@ -1,13 +1,28 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace WebApplication.Models.AccountViewModels
+namespace Booking.Models.AccountViewModels
 {
     public class RegisterViewModel
     {
+        [Required]
+        [StringLength(100, ErrorMessage = "The first name must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+        [Display(Name = "FirstName")]
+        public string FirstName { get; set; }
+
+        [Display(Name = "MiddleName")]
+        public string MiddleName { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The last name must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+        [Display(Name = "LastName")]
+        public string LastName { get; set; }
+
+        [Required]
+        [DataType(DataType.DateTime)]
+        [Display(Name = "BirthDate")]
+        public DateTime BirthDate { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

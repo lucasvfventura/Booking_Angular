@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -9,11 +5,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using WebApplication.Data;
-using WebApplication.Models;
-using WebApplication.Services;
+using Booking.Data;
+using Booking.Models;
+using Booking.Services;
+using Booking.Data.Repositories;
+using Booking.Data.Repositories.Abstract;
+using Newtonsoft.Json.Serialization;
 
-namespace WebApplication
+namespace Booking
 {
     public class Startup
     {
@@ -43,11 +42,31 @@ namespace WebApplication
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddMvc();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserCompanyRepository, UserCompanyRepository>();
+            services.AddScoped<ICompanyRepository, CompanyRepository>();
+            services.AddScoped<IPropertyRepository, PropertyRepository>();
+            services.AddScoped<IRoomBluePrintRepository, RoomBluePrintRepository>();
+            services.AddScoped<IRoomFeatureRepository, RoomFeatureRepository>();
+            services.AddScoped<IRoomRepository, RoomRepository>();
+            services.AddScoped<IAvailabilityRepository, AvailabilityRepository>();
+            services.AddScoped<IReservationRepository, ReservationRepository>();
+            services.AddScoped<IReservationReviewRepository, ReservationReviewRepository>();
+
+            services.AddMvc()
+                .AddJsonOptions(opt =>
+                {
+                    var resolver = opt.SerializerSettings.ContractResolver;
+                    if (resolver != null)
+                    {
+                        var res = resolver as DefaultContractResolver;
+                        res.NamingStrategy = null;
+                    }
+                });
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
@@ -85,12 +104,6 @@ namespace WebApplication
                 );
             });
 
-            // app.UseMvc(routes => {
-            //     routes.MapRoute(
-            //         name: "Default",
-            //         template: "/{controller=Home}/{action=Index}/{id?}"
-            //     );
-            // });
         }
     }
 }
