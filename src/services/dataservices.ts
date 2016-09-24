@@ -1,7 +1,6 @@
 import 'whatwg-fetch';
 import { HttpClient, json } from 'aurelia-fetch-client';
 import { autoinject } from 'aurelia-framework';
-import { ApiException } from './apiexception'
 
 @autoinject()
 export class DataService{
@@ -12,7 +11,7 @@ export class DataService{
         this.client = client;
         this.client.configure(config => {
             config
-                .withBaseUrl('/api/')
+                //.withBaseUrl('/api/')
                 .withDefaults({
                     credentials: 'same-origin',
                     headers: {
@@ -29,30 +28,18 @@ export class DataService{
     }
 
     get(){
-        if(this.baseUri == "") {
-            throw new ApiException("Base uri must be set before using this method");
-        }
         return this.client.fetch(this.baseUri);
     }
 
     getCustomResource(resource:string){
-        if(this.baseUri == "") {
-            throw new ApiException("Base uri must be set before using this method");
-        }
         return this.client.fetch(this.baseUri + resource);
     }
 
     post(resource:any){
-        if(this.baseUri == "") {
-            throw new ApiException("Base uri must be set before using this method");
-        }
         return this.client.fetch(this.baseUri, { method: "POST", body: json(resource) })
     }
 
     postCustomResource(resourceUri:string, resource:any){
-        if(this.baseUri == "") {
-            throw new ApiException("Base uri must be set before using this method");
-        }
         return this.client.fetch(
                  this.baseUri + resourceUri, 
                  { method: "POST", body: json(resource) }
@@ -60,20 +47,8 @@ export class DataService{
     }
 
     delete(id: string){
-        if(this.baseUri == "") {
-            throw  new ApiException("Base uri must be set before using this method");
-        }
         return this.client.fetch(this.baseUri + `/${id}`, {
             method: "DELETE"
-        });
-    }
-
-    put(resource:any){
-        if(this.baseUri == "") {
-            throw  new ApiException("Base uri must be set before using this method");
-        }
-        return this.client.fetch(this.baseUri, {
-            method: "DELETE"
-        });
+        })
     }
 }

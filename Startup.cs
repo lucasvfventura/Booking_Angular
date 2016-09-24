@@ -97,13 +97,19 @@ namespace Booking
 
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
 
+            // app.UseMvc(routes => {
+            //     routes.MapRoute(
+            //         name: "api",
+            //         template: "api/{controller}/{id?}"
+            //     );
+            // });
+
             app.UseMvc(routes => {
                 routes.MapRoute(
-                    name: "api",
-                    template: "api/{controller}/{id?}"
+                    name: "Default",
+                    template: "{controller=Home}/{action=Index}/{id?}"
                 );
             });
-
         }
     }
 }
