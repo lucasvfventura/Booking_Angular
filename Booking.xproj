@@ -8,6 +8,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>c19c1d82-40ff-4e3c-b233-7d95fd0b250b</ProjectGuid>
     <RootNamespace>Booking</RootNamespace>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">..\artifacts\obj\$(MSBuildProjectName)</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
   </PropertyGroup>
