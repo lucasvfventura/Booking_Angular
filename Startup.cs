@@ -84,11 +84,14 @@ namespace Booking
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
                 app.UseBrowserLink();
+                DbInitializer.Init(app.ApplicationServices);
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            AutoMapperConfiguration.Configure();
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
@@ -96,14 +99,7 @@ namespace Booking
             app.UseIdentity();
 
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
-
-            app.UseMvc(routes => {
-                routes.MapRoute(
-                    name: "api",
-                    template: "api/{controller}/{id?}"
-                );
-            });
-
+            app.UseMvc();
         }
     }
 }

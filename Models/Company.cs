@@ -10,6 +10,7 @@ namespace Booking.Models
             Phones = new List<Phone>();
             Administrators = new List<UserCompany>();
         }
+
         public string Id { get; set; }
         public string Name { get; set; }
         public string RegistrationNumber { get; set; }

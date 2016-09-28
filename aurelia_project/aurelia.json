@@ -130,6 +130,11 @@
             "main": "aurelia-testing",
             "env": "dev"
           },
+          {
+            "name": "aurelia-validation",
+            "path": "../node_modules/aurelia-validation/dist/amd",
+            "main": "aurelia-validation"
+          },
           "whatwg-fetch",
           "jquery",
           "moment",
@@ -137,17 +142,17 @@
             "name": "bootstrap",
             "path": "../node_modules/bootstrap/dist",
             "main": "js/bootstrap.min",
-            "deps": ["jquery"],
+            "deps": [ "jquery" ],
             "exports": "$",
-            "resources": ["css/bootstrap.css"]
+            "resources": [ "css/bootstrap.css" ]
           },
           {
             "name": "bootstrap-daterangepicker",
             "path": "../node_modules/bootstrap-daterangepicker",
             "main": "daterangepicker",
-            "deps": ["jquery", "moment"],
+            "deps": [ "jquery", "moment" ],
             "exports": "daterangepicker",
-            "resources": ["daterangepicker.css"]
+            "resources": [ "daterangepicker.css" ]
           }
         ]
       }
