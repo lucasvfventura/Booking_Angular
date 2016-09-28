@@ -2,6 +2,7 @@ import 'whatwg-fetch';
 import { HttpClient, json } from 'aurelia-fetch-client';
 import { autoinject } from 'aurelia-framework';
 import { ApiException } from './apiexception'
+import { buildQueryString } from 'aurelia-path'
 
 @autoinject()
 export class DataService{
@@ -28,11 +29,12 @@ export class DataService{
         this.baseUri = baseUri;
     }
 
-    get(){
+    get(query?: Object) {
         if(this.baseUri == "") {
             throw new ApiException("Base uri must be set before using this method");
         }
-        return this.client.fetch(this.baseUri);
+
+        return this.client.fetch(query == null ? this.baseUri : `${this.baseUri}?${buildQueryString(query, true)}`);
     }
 
     getCustomResource(resource:string){

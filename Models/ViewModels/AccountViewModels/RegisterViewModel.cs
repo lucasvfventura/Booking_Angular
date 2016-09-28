@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Booking.Models.AccountViewModels
+namespace Booking.Models.ViewModels.AccountViewModels
 {
     public class RegisterViewModel
     {
@@ -11,6 +11,7 @@ namespace Booking.Models.AccountViewModels
         public string FirstName { get; set; }
 
         [Display(Name = "MiddleName")]
+        [StringLength(100, ErrorMessage = "The middle name must be at max {1} characters long.")]
         public string MiddleName { get; set; }
 
         [Required]
@@ -34,6 +35,7 @@ namespace Booking.Models.AccountViewModels
         [Display(Name = "Password")]
         public string Password { get; set; }
 
+        [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]

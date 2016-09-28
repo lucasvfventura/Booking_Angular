@@ -1,6 +1,9 @@
 <template>
-    <ul class="nav navbar-nav navbar-right">
+    <ul if.bind="user == null" class="nav navbar-nav navbar-right">
         <li><a route-href="route: register">Register</a></li>
         <li><a>Log in</a></li>
+    </ul>
+    <ul if.bind="user != null" class="nav navbar-nav navbar-right">
+        <li><a>Logged in</a></li>
     </ul>
 </template>
