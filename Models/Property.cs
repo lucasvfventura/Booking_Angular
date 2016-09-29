@@ -3,7 +3,7 @@ using Booking.Models.Util;
 
 namespace Booking.Models
 {
-    public class Property : IEntity
+    public class Property : IEntity<uint>
     {
         public Property ()
         {
@@ -11,9 +11,12 @@ namespace Booking.Models
             Rooms = new List<Room>();
             RoomBluePrints = new List<RoomBluePrint>();
         }
-        public string Id { get; set; }
+        public uint Id { get; set; }
+        public string Name { get; set; }
+        public uint CompanyId { get; set; }
+        public Company Company { get; set; }
         public List<Phone> Phones { get; set; }
-        public string AddressId { get; set; }
+        public uint AddressId { get; set; }
         public Address Address { get; set; }
         public List<Room> Rooms { get; set; }
         public List<RoomBluePrint> RoomBluePrints { get; set; }

@@ -42,8 +42,8 @@ namespace Booking
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<User, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+            services.AddIdentity<User, IdentityRole<uint>>()
+                .AddEntityFrameworkStores<ApplicationDbContext,uint>()
                 .AddDefaultTokenProviders();
 
             services.AddScoped<IUserRepository, UserRepository>();

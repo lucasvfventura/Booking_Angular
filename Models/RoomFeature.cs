@@ -1,8 +1,8 @@
 namespace Booking.Models
 {
-    public class RoomFeature : IEntity
+    public class RoomFeature : IEntity<uint>
     {
-        public string Id { get; set; }
+        public uint Id { get; set; }
         public string Feature { get; set; }
     }
 }

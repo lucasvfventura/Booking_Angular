@@ -4,13 +4,14 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Booking.Models
 {
-    public class User : IdentityUser, IEntity
+    public class User : IdentityUser<uint>, IEntity<uint>
     {
         public User ()
         {
             Companies =  new List<UserCompany>();
             UserType = UserType.Customer;
         }
+
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
@@ -19,5 +20,5 @@ namespace Booking.Models
         public List<UserCompany> Companies { get; set; }
     }
 
-    public enum UserType {Customer, Administrator};
+    public enum UserType {Customer, Administrator}
 }

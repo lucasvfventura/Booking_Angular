@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Booking.Models;
+using Booking.Models.Util;
 
 namespace Booking.Data
 {
@@ -20,19 +21,29 @@ namespace Booking.Data
 
         private static void InitCompanies()
         {
-            if (!context.Companies.Any())
+            context.Companies.RemoveRange(context.Companies);
+            context.Properties.RemoveRange(context.Properties);
+            context.SaveChanges();
+
+            for (int i = 0; i < 10; i++)
             {
-                for (int i = 0; i < 10; i++)
+                var company = new Company()
                 {
-                    context.Companies.Add(new Company()
-                    {
-                        //TODO: remove id setting
-                        Id = $"{i}",
-                        Name = $"Company {i}"
-                    });
-                }
-                context.SaveChanges();
+                    Name = $"Company {i}"
+                };
+
+                var property = new Property()
+                {
+                    Name = $"Property {i} of Company {i}",
+                    Address = new Address() { City = "Burnaby", Country = "Canada"},
+                    Company = company
+                };
+
+                company.Properties.Add(property);
+
+            context.Companies.Add(company);
             }
+            context.SaveChanges();
         }
     }
 }
