@@ -10,7 +10,7 @@ using Booking.Data.Repositories.Abstract;
 
 namespace Booking.Data.Repositories
 {
-    public abstract class EntityRepository<T> : IEntityRepository<T> where T : class, IEntity, new()
+    public abstract class EntityRepository<T> : IEntityRepository<T,uint> where T : class, IEntity<uint>, new()
     {
         private ApplicationDbContext context;
         public EntityRepository (ApplicationDbContext context)
@@ -86,7 +86,7 @@ namespace Booking.Data.Repositories
             return context.Set<T>().FirstOrDefault(predicate);
         }
 
-        public virtual T GetSingle(string id)
+        public virtual T GetSingle(uint id)
         {
             return context.Set<T>().FirstOrDefault(e => e.Id == id);
         }
@@ -103,7 +103,7 @@ namespace Booking.Data.Repositories
             return query.Where(predicate).FirstOrDefault();
         }
 
-        public virtual async Task<T> GetSingleAsync(string id)
+        public virtual async Task<T> GetSingleAsync(uint id)
         {
             return await context.Set<T>().FirstOrDefaultAsync(e => e.Id == id);
         }

@@ -9,7 +9,7 @@ Feel free to contact me at @lucasvfv.
 ## This application consists of:
 
 *   [ASP.NET Core](http://www.asp.net/): back-end API
-*   [Aurelia](http://aurelia.io/): front-end framework
+*   [Angular 2](http://angular.io/): front-end framework
 *	[Elastic Search](https://www.elastic.co/): textual search
 *   [Bootstrap](http://getbootstrap.com/): style and responsiveness
 *	*[Xamarin](https://www.xamarin.com) : future mobile front-end*
@@ -18,16 +18,17 @@ Feel free to contact me at @lucasvfv.
 
 *   [NodeJs](https://nodejs.org)
 *   [.Net Core](https://www.microsoft.com/net/core)
+*   [ElasticSearch](https://www.elastic.co/products/elasticsearch)
 
 ## Running
 
-##### Dependencies
+##### Installing dependencies:
 *   *npm install*
 *   *dotnet restore*
-*   *aurelia-cli: npm install aurelia-cli -g*
+*   *angular-cli: npm install angular-cli -g*
 
-##### Running
-*   **au run --watch**
+##### Running:
+*   **ng build**
 *   **dotnet watch run**
 
 Enjoy!

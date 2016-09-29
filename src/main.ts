@@ -1,27 +1,12 @@
-import { Aurelia } from 'aurelia-framework'
-import environment from './environment';
+import './polyfills.ts';
 
-//Configure Bluebird Promises.
-//Note: You may want to use environment-specific configuration.
-(<any>Promise).config({
-    warnings: {
-        wForgottenReturn: false
-    }
-});
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { enableProdMode } from '@angular/core';
+import { environment } from './environments/environment';
+import { AppModule } from './app/';
 
-export function configure(aurelia: Aurelia) {
-    aurelia.use
-        .standardConfiguration()
-        .plugin('aurelia-validation')
-        .feature('resources');
-
-    if (environment.debug) {
-        aurelia.use.developmentLogging();
-    }
-
-    if (environment.testing) {
-        aurelia.use.plugin('aurelia-testing');
-    }
-
-    aurelia.start().then(() => aurelia.setRoot());
+if (environment.production) {
+  enableProdMode();
 }
+
+platformBrowserDynamic().bootstrapModule(AppModule);

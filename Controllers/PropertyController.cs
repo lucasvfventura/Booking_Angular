@@ -10,11 +10,11 @@ using Booking.Data.Repositories.Abstract;
 namespace Booking.Controllers
 {
     [Route("api/[controller]")]
-    public class CompanyController : Controller
+    public class PropertyController : Controller
     {
-        private ICompanyRepository repository;
+        private IPropertyRepository repository;
 
-        public CompanyController(ICompanyRepository repository)
+        public PropertyController(IPropertyRepository repository)
         {
             this.repository = repository;
         }
@@ -23,9 +23,8 @@ namespace Booking.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAsync([FromQuery] string expression)
         {
-            var companies = await repository.GetAllAsync();
-            // TODO: return ViewModel with AutoMapper
-            return Json(companies);
+            var properties = await repository.GetAllAsync();
+            return Json(properties);
         }
 
         // GET api/values/5

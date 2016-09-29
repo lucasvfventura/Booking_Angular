@@ -1,10 +1,10 @@
 namespace Booking.Models
 {
-    public class UserCompany : IEntity
+    public class UserCompany : IEntity<uint>
     {
-        public string Id { get; set; }
-        public string UserId { get; set; }
-        public string CompanyId { get; set; }
+        public uint Id { get; set; }
+        public uint UserId { get; set; }
+        public uint CompanyId { get; set; }
         public UserCompanyStatus Status { get; set; }
         public UserCompanyProfile Profile { get; set; }
     }

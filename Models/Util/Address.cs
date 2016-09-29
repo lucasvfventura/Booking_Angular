@@ -1,8 +1,8 @@
 namespace Booking.Models.Util
 {
-    public class Address : IEntity
+    public class Address : IEntity<uint>
     {
-        public string Id { get; set; }
+        public uint Id { get; set; }
         public string StreetAddress1 { get; set; }
         public string StreetAddress2 { get; set; }
         public string City { get; set; }

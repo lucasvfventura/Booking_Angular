@@ -89,7 +89,11 @@
   "buildOptions": {
     "debugType": "portable",
     "emitEntryPoint": true,
-    "preserveCompilationContext": true
+    "preserveCompilationContext": true,
+
+    "compile": {
+      "exclude": ["node_modules"]
+    }
   },
 
   "runtimeOptions": {
@@ -108,7 +112,7 @@
   },
 
   "scripts": {
-    "prepublish": [ "au build" ],
+    "prepublish": [ "ng build" ],
     "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
   },
 
