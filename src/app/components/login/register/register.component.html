@@ -1,0 +1,98 @@
+<div class="container-fluid">
+    <h4>Create a new account.</h4>
+    <hr />
+    <form [formGroup]="registrationForm"  (ngSubmit)="submit()">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Personal Information:</div>
+                    <div class="panel-body">
+                        <div class="form-group" [class]="registrationForm.controls.firstName.errors ? 'has-error' : ''">
+                            <label>
+                                First Name:
+                                <input type="text" class="form-control" placeholder="First Name" formControlName="firstName">
+                            </label>
+                            <span class="help-block" *ngIf="registrationForm.controls.firstName.errors">
+                                {{ registrationForm.controls.firstName.errors }}
+                            </span>
+                        </div>
+                        <!--<div class="form-group" validation-errors.bind="middleNameErrors"
+                             class.bind="middleNameErrors.length ? 'has-error' : ''">
+                            <label>
+                                Middle Name:
+                                <input type="text" class="form-control" [(ngModel)]="model.middleName" name="middleName"/>
+                            </label>
+                            <span class="help-block" repeat.for="errorInfo of middleNameErrors">
+                                ${errorInfo.error.message}
+                            </span>
+                        </div>
+                        <div class="form-group" validation-errors.bind="lastNameErrors"
+                             class.bind="lastNameErrors.length ? 'has-error' : ''">
+                            <label>
+                                Last Name:
+                                <input type="text" class="form-control" [(ngModel)]="model.lastName" name="lastName" />
+                            </label>
+                            <span class="help-block" repeat.for="errorInfo of lastNameErrors">
+                                ${errorInfo.error.message}
+                            </span>
+                        </div>
+                        <div class="form-group" validation-errors.bind="birthDateErrors"
+                             class.bind="birthDateErrors.length ? 'has-error' : ''">
+                            <label>
+                                Birth date:
+                                <input id="birthdate" type="text" class="form-control" [(ngModel)]="model.birthDate" name="birthDate"/>
+                            </label>
+                            <span class="help-block" repeat.for="errorInfo of birthDateErrors">
+                                ${errorInfo.error.message}
+                            </span>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+
+            <!--<div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Login Details</div>
+                    <div class="panel-body">
+                        <div class="form-group" validation-errors.bind="emailErrors"
+                             class.bind="emailErrors.length ? 'has-error' : ''">
+                            <label>
+                                E-mail:
+                                <input type="email" class="form-control" [(ngModel)]="model.email" name="email"/>
+                            </label>
+                            <span class="help-block" repeat.for="errorInfo of emailErrors">
+                                ${errorInfo.error.message}
+                            </span>
+                        </div>
+                        <div class="form-group" validation-errors.bind="passwordErrors"
+                             class.bind="passwordErrors.length ? 'has-error' : ''">
+                            <label>
+                                Password:
+                                <input type="password" class="form-control" [(ngModel)]="model.password" name="password"/>
+                            </label>
+                            <span class="help-block" repeat.for="errorInfo of passwordErrors">
+                                ${errorInfo.error.message}
+                            </span>
+                        </div>
+                        <div class="form-group" validation-errors.bind="confirmPasswordErrors"
+                             class.bind="confirmPasswordErrors.length ? 'has-error' : ''">
+                            <label>
+                                Confirm Password:
+                                <input type="password" class="form-control"
+                                       placeholder="Confirm Password"
+                                       [(ngModel)]="model.confirmPassword" name="confirmPassword"/>
+                            </label>
+                            <span class="help-block" repeat.for="errorInfo of confirmPasswordErrors">
+                                ${errorInfo.error.message}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+        </div>
+
+        <div class="form-inline form-group">
+            <button class="btn btn-success" type="submit">Register</button>
+        </div>
+    </form>
+</div>

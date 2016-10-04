@@ -1,0 +1,13 @@
+<div class="container-fluid">
+    <form>
+        <input class="form-group" type="text" [(ngModel)]="expression" name="expression"/>
+        <button class="btn btn-success" (click)="search()">Search</button>
+    </form>
+</div>
+<div class="container-fluid">
+    <ul *ngFor="let property of properties">
+        <li>
+            Property Name: {{property.Name}}
+        </li>
+    </ul>
+</div>

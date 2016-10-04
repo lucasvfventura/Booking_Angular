@@ -16,4 +16,9 @@
     <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\DNX\Microsoft.DNX.targets" Condition="'$(VSToolsPath)' != ''" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties angular-cli_1json__JSONSchema="angular" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

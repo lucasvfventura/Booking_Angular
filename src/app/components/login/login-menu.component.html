@@ -1,0 +1,7 @@
+<ul *ngIf="user == null" class="nav navbar-nav navbar-right">
+    <li><a routerLink='/register' routerLinkActive="active">Register</a></li>
+    <li><a>Log in</a></li>
+</ul>
+<ul *ngIf="user != null" class="nav navbar-nav navbar-right">
+    <li><a>Logged in</a></li>
+</ul>
